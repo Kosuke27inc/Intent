@@ -2,18 +2,21 @@ package jp.techacademy.kosuke.miyazaki.intent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import jp.techacademy.kosuke.miyazaki.intent.databinding.ActivitySecondBinding
 
 class SecondActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySecondBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        binding = ActivitySecondBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-            //戻るボタンを表示する
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
+        val value1 = intent.getIntExtra("VALUE1",0)
+        val value2 = intent.getIntExtra("VALUE2",0)
 
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressedDispatcher.onBackPressed()
-        return true
+        binding.textView.text = "${value1 + value2}"
+
     }
 }
